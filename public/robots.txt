@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://leaderinfo.ru
+
+# Sitemaps
+Sitemap: https://leaderinfo.ru/sitemap.xml

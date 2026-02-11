@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* === ТЁМНАЯ ТЕМА (по умолчанию) === */
+  :root {
+    /* Base surfaces — deep dark inspired by mastra.ai */
+    --background: 230 25% 5%;
+    --foreground: 210 40% 96%;
+
+    /* Card surfaces — layered depth */
+    --card: 230 20% 8%;
+    --card-foreground: 210 40% 96%;
+    --card-elevated: 230 18% 12%;
+
+    /* Popover */
+    --popover: 230 20% 10%;
+    --popover-foreground: 210 40% 96%;
+
+    /* Primary — vivid blue for dark backgrounds */
+    --primary: 220 90% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary — mint/teal pastel accent (hume.ai style) */
+    --secondary: 165 60% 60%;
+    --secondary-foreground: 230 25% 5%;
+
+    /* Accent — warm coral/salmon pastel */
+    --accent: 12 80% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Additional accent palette */
+    --accent-amber: 38 90% 60%;
+    --accent-violet: 270 60% 65%;
+    --accent-rose: 345 70% 65%;
+
+    /* Muted surfaces */
+    --muted: 230 15% 15%;
+    --muted-foreground: 220 15% 55%;
+
+    /* Borders and inputs */
+    --border: 230 15% 18%;
+    --input: 230 15% 18%;
+    --ring: 220 90% 60%;
+
+    /* Destructive */
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Radius — larger for modern feel */
+    --radius: 0.75rem;
+
+    /* Glow/ambient colors */
+    --glow-primary: 220 90% 60%;
+    --glow-secondary: 165 60% 60%;
+    --glow-accent: 12 80% 65%;
+  }
+
+  /* === СВЕТЛАЯ ТЕМА === */
+  .light {
+    --background: 220 20% 97%;
+    --foreground: 230 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 230 25% 10%;
+    --card-elevated: 220 15% 95%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 25% 10%;
+
+    --primary: 220 85% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 165 55% 40%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 12 75% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --accent-amber: 38 85% 50%;
+    --accent-violet: 270 55% 55%;
+    --accent-rose: 345 65% 55%;
+
+    --muted: 220 15% 93%;
+    --muted-foreground: 220 10% 45%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 220 85% 50%;
+
+    --destructive: 0 80% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --radius: 0.75rem;
+
+    --glow-primary: 220 85% 50%;
+    --glow-secondary: 165 55% 40%;
+    --glow-accent: 12 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism card — dark theme */
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.06] rounded-2xl;
+  }
+  .glass-card-hover {
+    @apply hover:bg-white/[0.06] hover:border-white/[0.10] transition-all duration-300;
+  }
+
+  /* Glassmorphism — light theme overrides */
+  .light .glass-card {
+    @apply bg-white/80 backdrop-blur-xl border border-black/[0.06] rounded-2xl shadow-sm;
+  }
+  .light .glass-card-hover {
+    @apply hover:bg-white/90 hover:border-black/[0.10] hover:shadow-md;
+  }
+
+  /* Glow effects (mastra.ai atmospheric depth) */
+  .glow-primary {
+    box-shadow: 0 0 80px 20px hsl(var(--glow-primary) / 0.08);
+  }
+  .glow-secondary {
+    box-shadow: 0 0 80px 20px hsl(var(--glow-secondary) / 0.08);
+  }
+  .glow-accent {
+    box-shadow: 0 0 80px 20px hsl(var(--glow-accent) / 0.08);
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Monospace accent label (hume.ai technique) */
+  .label-mono {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground;
+  }
+
+  /* Gradient text */
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-primary;
+  }
+  .text-gradient-accent {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent via-accent-amber to-accent;
+  }
+}
+
+/* Поддержка prefers-reduced-motion для доступности */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
