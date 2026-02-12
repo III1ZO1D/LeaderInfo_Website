@@ -63,7 +63,7 @@ export default function ProductsPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main-content">
         <ProductBreadcrumb
           items={[
             { label: 'Главная', href: '/' },

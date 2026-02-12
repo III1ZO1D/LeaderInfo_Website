@@ -1,17 +1,38 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { SocialProofBar } from '@/components/sections/SocialProofBar';
-import { Features } from '@/components/sections/Features';
-import { ProductShowcase } from '@/components/sections/ProductShowcase';
-import { IndustrySolutions } from '@/components/sections/IndustrySolutions';
-import { Testimonials } from '@/components/sections/Testimonials';
-import { FAQ } from '@/components/sections/FAQ';
-import { CTASection } from '@/components/sections/CTASection';
 import { SectionDivider } from '@/components/ui/SectionDivider';
 import { generateOrganizationSchema, generateFAQSchema } from '@/lib/seo';
 import { faqs } from '@/data/faqs';
+
+// Below-fold секции загружаются динамически для ускорения первого рендера
+const Features = dynamic(
+  () => import('@/components/sections/Features').then((m) => ({ default: m.Features })),
+  { ssr: false }
+);
+const ProductShowcase = dynamic(
+  () => import('@/components/sections/ProductShowcase').then((m) => ({ default: m.ProductShowcase })),
+  { ssr: false }
+);
+const IndustrySolutions = dynamic(
+  () => import('@/components/sections/IndustrySolutions').then((m) => ({ default: m.IndustrySolutions })),
+  { ssr: false }
+);
+const Testimonials = dynamic(
+  () => import('@/components/sections/Testimonials').then((m) => ({ default: m.Testimonials })),
+  { ssr: false }
+);
+const FAQ = dynamic(
+  () => import('@/components/sections/FAQ').then((m) => ({ default: m.FAQ })),
+  { ssr: false }
+);
+const CTASection = dynamic(
+  () => import('@/components/sections/CTASection').then((m) => ({ default: m.CTASection })),
+  { ssr: false }
+);
 
 export const metadata: Metadata = {
   title:
@@ -51,7 +72,7 @@ export default function HomePage() {
 
       <Header />
 
-      <main>
+      <main id="main-content">
         <Hero />
         <SectionDivider />
         <SocialProofBar />

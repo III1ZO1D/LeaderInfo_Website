@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Send, CheckCircle, Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { quickLeadSchema, type QuickLeadFormData } from '@/lib/validations';
+import { trackDemoRequest } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 
 interface QuickLeadFormProps {
@@ -41,12 +43,21 @@ export function QuickLeadForm({
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
-        setIsSuccess(true);
-        reset();
+      if (response.status === 429) {
+        toast.error('Слишком много заявок. Попробуйте через минуту.');
+        return;
       }
+
+      if (!response.ok) {
+        toast.error('Не удалось отправить заявку. Попробуйте ещё раз.');
+        return;
+      }
+
+      setIsSuccess(true);
+      reset();
+      trackDemoRequest();
     } catch {
-      // В будущем — показать toast с ошибкой
+      toast.error('Ошибка сети. Проверьте подключение к интернету.');
     } finally {
       setIsSubmitting(false);
     }
@@ -140,6 +151,7 @@ export function QuickLeadForm({
           size="xl"
           className="w-full"
           disabled={isSubmitting}
+          aria-busy={isSubmitting}
         >
           {isSubmitting ? (
             <>

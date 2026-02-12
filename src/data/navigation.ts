@@ -28,6 +28,10 @@ export const mainNavigation: NavItem[] = [
     ],
   },
   {
+    label: 'Цены',
+    href: '/pricing',
+  },
+  {
     label: 'О компании',
     href: '/about',
     children: [

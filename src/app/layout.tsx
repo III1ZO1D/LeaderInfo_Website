@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Toaster } from 'sonner';
 import { DemoModalProvider } from '@/components/providers/DemoModalProvider';
 import { DemoModal } from '@/components/modals/DemoModal';
+import { Analytics } from '@/components/providers/Analytics';
 import '@/styles/globals.css';
 
 const inter = Inter({
@@ -93,10 +95,27 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-primary focus:text-primary-foreground focus:text-sm focus:font-medium"
+        >
+          Перейти к содержимому
+        </a>
         <DemoModalProvider>
           {children}
           <DemoModal />
         </DemoModalProvider>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: 'hsl(var(--card))',
+              border: '1px solid hsl(var(--border))',
+              color: 'hsl(var(--foreground))',
+            },
+          }}
+        />
+        <Analytics />
       </body>
     </html>
   );

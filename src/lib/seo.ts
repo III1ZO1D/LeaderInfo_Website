@@ -71,3 +71,28 @@ export function generateBreadcrumbSchema(
     })),
   };
 }
+
+export function generateCaseStudySchema(caseStudy: {
+  title: string;
+  slug: string;
+  client: string;
+  challenge: string;
+  solution: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: caseStudy.title,
+    author: {
+      '@type': 'Organization',
+      name: 'ЛидерИнфо',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ЛидерИнфо',
+      url: 'https://leaderinfo.ru',
+    },
+    description: caseStudy.challenge,
+    url: `https://leaderinfo.ru/case-studies/${caseStudy.slug}`,
+  };
+}

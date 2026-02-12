@@ -21,15 +21,54 @@ export function DemoModal() {
     };
   }, [isOpen]);
 
-  // Close on Escape
+  // Close on Escape + focus trap
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        close();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        const modal = document.querySelector('[role="dialog"]');
+        if (!modal) return;
+
+        const focusable = modal.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
     };
-    if (isOpen) {
-      window.addEventListener('keydown', handleEsc);
-    }
-    return () => window.removeEventListener('keydown', handleEsc);
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Auto-focus first focusable element
+    requestAnimationFrame(() => {
+      const modal = document.querySelector('[role="dialog"]');
+      const firstFocusable = modal?.querySelector<HTMLElement>(
+        'button, [href], input, select, textarea'
+      );
+      firstFocusable?.focus();
+    });
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, close]);
 
   return (
@@ -54,6 +93,9 @@ export function DemoModal() {
           {/* Modal content */}
           <motion.div
             className="relative z-10 w-full max-w-md glass-card p-8"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="demo-modal-title"
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
@@ -76,7 +118,7 @@ export function DemoModal() {
               <span className="label-mono text-primary mb-2 block">
                 Демо-доступ
               </span>
-              <h3 className="text-2xl font-bold">Получить демо-доступ</h3>
+              <h3 id="demo-modal-title" className="text-2xl font-bold">Получить демо-доступ</h3>
               <p className="text-sm text-muted-foreground mt-2">
                 Заполните форму и мы свяжемся с вами в течение 2 часов
               </p>

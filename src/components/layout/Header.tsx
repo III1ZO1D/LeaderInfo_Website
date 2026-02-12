@@ -167,6 +167,8 @@ function NavItemDesktop({
       <button
         className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors rounded-xl hover:bg-white/[0.06]"
         onClick={() => setOpenDropdown(isOpen ? null : item.label)}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
       >
         {item.label}
         <ChevronDown
@@ -229,6 +231,7 @@ function MobileNavItem({
       <button
         className="flex w-full items-center justify-between px-3 py-3 text-base font-medium hover:bg-white/[0.06] rounded-xl transition-colors"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
       >
         {item.label}
         <ChevronDown

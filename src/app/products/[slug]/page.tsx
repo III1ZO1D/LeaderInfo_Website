@@ -70,7 +70,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   return (
     <>
       <Header />
-      <main>
+      <main id="main-content">
         <ProductBreadcrumb
           items={[
             { label: 'Главная', href: '/' },

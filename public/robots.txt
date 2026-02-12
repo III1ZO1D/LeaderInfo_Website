@@ -1,6 +1,16 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Yandex
+User-agent: Yandex
+Allow: /
 
 # Host
 Host: https://leaderinfo.ru

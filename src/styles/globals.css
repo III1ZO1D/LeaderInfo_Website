@@ -164,6 +164,16 @@
   }
 }
 
+/* Performance: скрытие off-screen секций для быстрого рендеринга */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+.contain-layout {
+  contain: layout style paint;
+}
+
 /* Поддержка prefers-reduced-motion для доступности */
 @media (prefers-reduced-motion: reduce) {
   *,

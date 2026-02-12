@@ -11,6 +11,7 @@ export interface CaseStudy {
   metadata: {
     title: string;
     description: string;
+    keywords?: string[];
   };
 }
 
