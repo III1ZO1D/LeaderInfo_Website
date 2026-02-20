@@ -12,7 +12,7 @@ interface ProductBreadcrumbProps {
 
 export function ProductBreadcrumb({ items }: ProductBreadcrumbProps) {
   return (
-    <nav aria-label="Breadcrumb" className="container pt-6 pb-2">
+    <nav aria-label="Breadcrumb" className="container pt-20 md:pt-24 pb-2">
       <ol className="flex items-center gap-1.5 text-sm">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
