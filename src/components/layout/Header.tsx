@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -47,12 +48,14 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between md:h-20">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent-violet">
-            <span className="text-lg font-bold text-white">Л</span>
-          </div>
-          <span className="text-xl font-bold">
-            Лидер<span className="text-primary">Инфо</span>
-          </span>
+          <Image
+            src="/images/lojo.png"
+            alt="ЛидерИнфо"
+            width={210}
+            height={60}
+            className="h-14 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}

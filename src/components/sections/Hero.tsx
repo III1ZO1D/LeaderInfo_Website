@@ -125,7 +125,7 @@ export function Hero() {
               data-hero-heading
               className="mt-6 text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-bold leading-[1.1] tracking-tight"
             >
-              Нормативная документация{' '}
+              Цифровой помощник{' '}
               <span className="text-gradient-primary">для профессионалов</span>
             </h1>
 
@@ -134,9 +134,9 @@ export function Hero() {
               data-hero-subtitle
               className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl"
             >
-              Справочные системы ТехЭксперт и Кодекс с полным сервисом:
-              подбор решения, внедрение, обучение и техническая поддержка.
-              Работаем с 2000 года.
+              Цифровые справочные системы ТехЭксперт и Кодекс с полным
+              сервисом: подбор решения, внедрение, обучение и техническая
+              поддержка. Работаем с 2000 года.
             </p>
 
             {/* CTAs */}

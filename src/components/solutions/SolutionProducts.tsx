@@ -1,19 +1,33 @@
 'use client';
 
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import { ScrollOrchestrator } from '@/components/animations/ScrollOrchestrator';
-import { ProductCard } from '@/components/products/ProductCard';
-import { products } from '@/data/products';
+import { SystemCard } from '@/components/products/SystemCard';
+import { categories } from '@/data/categories';
+
+// Mapping from solution (industry) slug to category slugs
+const solutionToCategoryMap: Record<string, string[]> = {
+  construction: ['stroitelyu'],
+  safety: ['bezopasnost'],
+  ecology: ['bezopasnost', 'promyshlennost'],
+  industrial: ['promyshlennost', 'mashinostroenie'],
+};
 
 interface SolutionProductsProps {
   industrySlug: string;
 }
 
 export function SolutionProducts({ industrySlug }: SolutionProductsProps) {
-  const relevantProducts = products.filter((p) =>
-    p.industries.includes(industrySlug)
-  );
+  const categorySlugs = solutionToCategoryMap[industrySlug] ?? [];
 
-  if (relevantProducts.length === 0) return null;
+  // Get first category and its systems for the primary solution
+  const primaryCategory = categories.find((c) => categorySlugs.includes(c.slug));
+  if (!primaryCategory) return null;
+
+  // Show first 3 systems of the primary category
+  const relevantSystems = primaryCategory.systems.slice(0, 3);
 
   return (
     <section className="py-24 relative overflow-hidden">
@@ -33,19 +47,31 @@ export function SolutionProducts({ industrySlug }: SolutionProductsProps) {
 
         <ScrollOrchestrator
           className={`grid gap-6 ${
-            relevantProducts.length === 1
+            relevantSystems.length === 1
               ? 'max-w-md mx-auto'
-              : relevantProducts.length === 2
+              : relevantSystems.length === 2
                 ? 'md:grid-cols-2 max-w-3xl mx-auto'
                 : 'md:grid-cols-2 lg:grid-cols-3'
           }`}
         >
-          {relevantProducts.map((product) => (
-            <div key={product.slug} data-animate>
-              <ProductCard product={product} variant="full" />
+          {relevantSystems.map((system) => (
+            <div key={system.slug} data-animate>
+              <SystemCard system={system} categorySlug={primaryCategory.slug} />
             </div>
           ))}
         </ScrollOrchestrator>
+
+        {primaryCategory.systems.length > 3 && (
+          <div className="mt-10 text-center">
+            <Link
+              href={`/products/${primaryCategory.slug}`}
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+            >
+              Все системы для {primaryCategory.shortTitle.toLowerCase()}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

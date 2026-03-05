@@ -10,11 +10,14 @@ export const mainNavigation: NavItem[] = [
     href: '/products',
     children: [
       { label: 'Все продукты', href: '/products' },
-      { label: 'Стройтехнолог', href: '/products/stroytekhnolog' },
-      { label: 'Охрана труда', href: '/products/ohrana-truda' },
-      { label: 'Экология', href: '/products/ekologiya' },
-      { label: 'Нормы, правила, стандарты', href: '/products/normy-pravila-standarty' },
-      { label: 'Электроэнергетика', href: '/products/elektroenergetika' },
+      { label: 'Специалисту по безопасности', href: '/products/bezopasnost' },
+      { label: 'Строителю, проектировщику', href: '/products/stroitelyu' },
+      { label: 'Специалисту промышленности', href: '/products/promyshlennost' },
+      { label: 'Инженеру, конструктору', href: '/products/mashinostroenie' },
+      { label: 'Специалисту лаборатории', href: '/products/laboratoriya' },
+      { label: 'Пищевой/Хим/Фарм промышленности', href: '/products/pishchevaya-khim-farm' },
+      { label: 'Специалисту в медицине', href: '/products/medicina' },
+      { label: 'Юристу, бухгалтеру, HR', href: '/products/yuristu-buhgalteru' },
     ],
   },
   {
@@ -49,11 +52,13 @@ export const footerNavigation = {
   products: {
     title: 'Продукты',
     items: [
-      { label: 'Стройтехнолог', href: '/products/stroytekhnolog' },
-      { label: 'Охрана труда', href: '/products/ohrana-truda' },
-      { label: 'Экология', href: '/products/ekologiya' },
-      { label: 'Нормы, правила, стандарты', href: '/products/normy-pravila-standarty' },
-      { label: 'Электроэнергетика', href: '/products/elektroenergetika' },
+      { label: 'По безопасности', href: '/products/bezopasnost' },
+      { label: 'Строителю', href: '/products/stroitelyu' },
+      { label: 'Промышленности', href: '/products/promyshlennost' },
+      { label: 'Инженеру', href: '/products/mashinostroenie' },
+      { label: 'Лаборатории', href: '/products/laboratoriya' },
+      { label: 'Медицине', href: '/products/medicina' },
+      { label: 'Юристу/Бухгалтеру', href: '/products/yuristu-buhgalteru' },
     ],
   },
   solutions: {

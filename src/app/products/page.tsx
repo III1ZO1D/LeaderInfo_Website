@@ -5,20 +5,20 @@ import { Footer } from '@/components/layout/Footer';
 import { SectionDivider } from '@/components/ui/SectionDivider';
 import { CTASection } from '@/components/sections/CTASection';
 import { ProductBreadcrumb } from '@/components/products/ProductBreadcrumb';
-import { ProductsGrid } from './ProductsGrid';
-import { products } from '@/data/products';
+import { CategoriesGrid } from './CategoriesGrid';
+import { categories } from '@/data/categories';
 
 export const metadata: Metadata = {
-  title: 'Продукты - Справочные системы ТехЭксперт',
+  title: 'Продукты - Цифровые справочные системы ТехЭксперт',
   description:
-    'Все справочные системы ТехЭксперт: Стройтехнолог, Охрана труда, Экология, Нормы и стандарты, Электроэнергетика. Подберём оптимальное решение для вашей отрасли.',
+    'Справочные системы ТехЭксперт для специалистов: безопасность, строительство, промышленность, машиностроение, медицина, лаборатории, юристы и бухгалтеры. Подберём оптимальное решение.',
   keywords: [
     'техэксперт продукты',
     'справочные системы',
-    'нормативные документы',
-    'стройтехнолог',
     'охрана труда',
-    'экология',
+    'строительные нормы',
+    'промышленная безопасность',
+    'нормативная документация',
   ],
   alternates: {
     canonical: 'https://leaderinfo.ru/products',
@@ -34,28 +34,28 @@ const commonFeatures = [
   {
     icon: Search,
     title: 'Умный поиск',
-    description: 'Поиск по контексту, ключевым словам и перекрёстным ссылкам',
+    description: 'Поиск по контексту, ключевым словам и перекрёстным ссылкам между документами',
   },
   {
     icon: WifiOff,
     title: 'Работа офлайн',
-    description: 'Доступ к документам без подключения к интернету',
+    description: 'Полный доступ к документам без подключения к интернету',
   },
   {
     icon: Download,
     title: 'Экспорт документов',
-    description: 'Выгрузка документов в PDF и Word для работы вне системы',
+    description: 'Выгрузка нужных документов в PDF и Word для работы вне системы',
   },
 ];
 
 const itemListSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  itemListElement: products.map((product, index) => ({
+  itemListElement: categories.map((category, index) => ({
     '@type': 'ListItem',
     position: index + 1,
-    name: product.title,
-    url: `https://leaderinfo.ru/products/${product.slug}`,
+    name: category.title,
+    url: `https://leaderinfo.ru/products/${category.slug}`,
   })),
 };
 
@@ -73,7 +73,6 @@ export default function ProductsPage() {
 
         {/* Hero */}
         <section className="pt-16 pb-20 relative overflow-hidden">
-          {/* Ambient */}
           <div className="absolute top-[-20%] right-[-10%] w-[700px] h-[700px] rounded-full bg-primary/[0.05] blur-[120px] pointer-events-none" />
           <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-secondary/[0.04] blur-[100px] pointer-events-none" />
 
@@ -81,22 +80,26 @@ export default function ProductsPage() {
             <div className="text-center max-w-3xl mx-auto">
               <span className="label-mono text-primary">Наши продукты</span>
               <h1 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-                Справочные системы{' '}
-                <span className="text-gradient-primary">для каждой отрасли</span>
+                Цифровой помощник{' '}
+                <span className="text-gradient-primary">для каждой профессии</span>
               </h1>
               <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                Полная линейка справочных систем ТехЭксперт для строительства,
-                охраны труда, экологии, стандартизации и энергетики. Все системы
-                включают ежедневную актуализацию и техническую поддержку.
+                Выберите категорию, соответствующую вашей профессии. В каждой —
+                специализированные справочные системы с полной нормативной базой
+                и ежедневным обновлением.
               </p>
+
+              <div className="mt-4 text-sm text-muted-foreground">
+                {categories.length} категорий · {categories.reduce((acc, c) => acc + c.systems.length, 0)} специализированных систем
+              </div>
             </div>
           </div>
         </section>
 
         <SectionDivider />
 
-        {/* Product Grid */}
-        <ProductsGrid />
+        {/* Categories Grid */}
+        <CategoriesGrid />
 
         <SectionDivider />
 
@@ -134,12 +137,10 @@ export default function ProductsPage() {
 
         <SectionDivider />
 
-        {/* CTA */}
         <CTASection />
       </main>
       <Footer />
 
-      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
