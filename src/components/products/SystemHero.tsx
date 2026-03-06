@@ -244,6 +244,8 @@ export function SystemHero({ system, categorySlug }: SystemHeroProps) {
                     onError={() => setImgError(true)}
                     sizes="(max-width: 1280px) 50vw, 640px"
                     priority
+                    placeholder="blur"
+                    blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExODI3Ii8+PC9zdmc+"
                   />
                   {/* subtle gradient overlay at the bottom so it fades into card */}
                   <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card/80 to-transparent pointer-events-none" />
